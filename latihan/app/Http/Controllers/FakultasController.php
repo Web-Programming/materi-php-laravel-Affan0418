@@ -2,72 +2,120 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fakultas;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class FakultasController extends Controller
 {
-    //Tampilkan semua data fakultas 
-    public function index()
-    {
-        $data = Fakultas::all();
-        return view('fakultas.index', compact('data'));
-    }
+    /**
+     * Display a listing of the resource.
+     */
 
-    //Tampilkan form tambah fakultas
-    public function create()
+    public function index()
+{
+     $fakultas = Fakultas::all();
+    return view('fakultas.index', compact('fakultas'));
+}
+
+    /**
+     * Show the form for creating a new resource.
+     */
+
+    public function create(Request $request)
     {
         return view('fakultas.create');
     }
 
-    // Simpan data fakultas baru
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
         $request->validate([
-            'nama'=>'required'
+            'nama' => 'required|string|max:50',
+            'deskripsi' => 'nullable|string',
+            'gambar' => 'nullable|image|max:2048',
         ]);
+
+        $gambarPath = null;
+        if ($request->hasFile('gambar')) {
+            $gambarPath = $request->file('gambar')->store('gambar_fakultas', 'public');
+        }
 
         Fakultas::create([
-            'nama'=>$request->nama
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $gambarPath,
         ]);
 
-        return redirect()->route('fakultas.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('fakultas.index')->with('success', 'Fakultas berhasil ditambahkan.');
+    }
+    
+
+    /**
+     * Display the specified resource.
+     */
+    public function detail($id)
+    {
     }
 
-    // Tampilkan detail fakultas 
-    public function show($id)
+    public function show(string $id)
     {
-        echo"Ilmu komputer dan rekayasa";
-    } 
-
-    //Tampilkan form edit fakultas
-    public function edit($id)
+    }
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
     {
-        $data = Fakultas::findOrFail($id);
-        return view('fakultas.edit', compact('data'));
+          $fakultas = Fakultas::findOrFail($id);
+    return view('fakultas.edit', compact('fakultas'));
     }
 
-    // Update data fakultas
-    public function update(Request $request, $id)
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
     {
         $request->validate([
-            'nama'=>'required'
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+            'gambar' => 'nullable|image|max:2048',
         ]);
 
-        $data = Fakultas::findOrFail($id);
-        $data->update([
-            'nama'=>$request->nama
+        $fakultas = Fakultas::findOrFail($id);
+
+        if ($request->hasFile('gambar')) {
+            if ($fakultas->gambar && Storage::exists('public/' . $fakultas->gambar)) {
+                Storage::delete('public/' . $fakultas->gambar);
+            }
+
+            $gambarPath = $request->file('gambar')->store('gambar_fakultas', 'public');
+            $fakultas->gambar = $gambarPath;
+        }
+
+        $fakultas->update([
+            'nama' => $request->nama,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $fakultas->gambar,
         ]);
 
-        return redirect()->route('fakultas.index')->with('success', 'Data berhasil di perbarui');
+        return redirect()->route('fakultas.index')->with('success', 'Fakultas berhasil diperbarui.');
     }
 
-    //Hapus data fakultas
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id)
-    {
-        $data = fakultas::findOrFail($id);
-        $data->delete();
+     {
+        $fakultas = Fakultas::findOrFail($id);
 
-         return redirect()->route('fakultas.index')->with('success', 'Data berhasil dihapus.');
-         
+        if ($fakultas->gambar && Storage::exists('public/' . $fakultas->gambar)) {
+            Storage::delete('public/' . $fakultas->gambar);
+        }
+
+        $fakultas->delete();
+
+        return redirect()->route('fakultas.index')->with('success', 'Fakultas berhasil dihapus.');
     }
 }
