@@ -26,17 +26,29 @@
 .fade-in.show {
   animation: fadeIn 1s ease-out forwards;
 }
+.fade-in:nth-child(1) { animation-delay: 0.1s; }
+.fade-in:nth-child(2) { animation-delay: 0.3s; }
+.fade-in:nth-child(3) { animation-delay: 0.5s; }
+/* atau pakai JS untuk kasih delay saat scroll masuk viewport */
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const fadeEls = document.querySelectorAll('.fade-in');
+    fadeEls.forEach(el => {
+      el.classList.add('show');
+    });
+  });
+</script>
     </style>
     
     <div style="width: 100%; overflow: hidden;">
-        <img src="{{ asset('img/mdpmerah.jpg') }}" alt="BannerMDP"style="width: 100%; height: auto; display: block;">
+        <img src="{{ asset('img/mdpmerah.jpg') }}" loading="lazy" alt="BannerMDP"style="width: 100%; height: auto; display: block;">
     </div>
     
-    <section class="py-5" id="#home">
+    <section class="py-5" id="home">
         <div class="container fade-in">
           <div class="row align-items-center">
             <div class="col-md-4 mb-3">
-              <img src="{{ asset('img/rektor.jpg') }}" alt="Rektor Universitas MDP" style="max-width: 100%; height: auto; border: 3px solid #800000;">
+              <img src="{{ asset('img/rektor.jpg') }}" loading="lazy" alt="Rektor Universitas MDP" style="max-width: 100%; height: auto; border: 3px solid #800000;">
             </div>
             <div class="col-md-8">
               <h3 class="text-danger">Sambutan Rektor Universitas MDP</h3>
@@ -60,7 +72,7 @@
           <div class="row g-4">
             <div class="col-md-4">
               <div class="card h-100">
-                <img src="{{ asset('img/berita1.jpg') }}" class="card-img-top" alt="Berita 1">
+                <img src="{{ asset('img/berita1.jpg') }}" loading="lazy" class="card-img-top" alt="Berita 1">
                 <div class="card-body">
                   <p class="card-text">Wisuda tahun 2025 Universitas MDP telah meluluskan lebih dari 500 mahasiswa pada wisuda tahun ini.</p>
                 </div>
@@ -69,7 +81,7 @@
   
             <div class="col-md-4">
               <div class="card h-100">
-                <img src="{{ asset('img/berita2.jpg') }}" class="card-img-top" alt="Berita 2">
+                <img src="{{ asset('img/berita2.jpg') }}" loading="lazy" class="card-img-top" alt="Berita 2">
                 <div class="card-body">
 
                   <p class="card-text">UMDP FEST Universitas MDP kembali mengadakan UMDP FEST pada tahun 2025 dan akan di selengarakan di PTC MALL</p>
@@ -79,7 +91,7 @@
   
             <div class="col-md-4">
               <div class="card h-100">
-                <img src="{{ asset('img/berita3.jpg') }}" class="card-img-top" alt="Berita 3">
+                <img src="{{ asset('img/berita3.jpg') }}" loading="lazy" class="card-img-top" alt="Berita 3">
                 <div class="card-body">
                   <p class="card-text">Universitas MDP menjalin kerja sama dengan IMA (Indonesai Marketin Association) dan menjalin beberapa kerjasama</p>
                 </div>
@@ -95,7 +107,7 @@
           <div class="row g-4">
             <div class="col-md-4">
               <div class="card h-100">
-                <img src="{{ asset('img/berita4.jpg') }}" class="card-img-top" alt="Berita 4">
+                <img src="{{ asset('img/berita4.jpg') }}" loading="lazy" class="card-img-top" alt="Berita 4">
                 <div class="card-body">
                   <p class="card-text">Dosen dari Universitas Multi Data Palembang (MDP) melaksanakan kegiatan pengabdian kepada masyarakat di Poltekkes Palembang</p>
                 </div>
@@ -104,7 +116,7 @@
   
             <div class="col-md-4">
               <div class="card h-100">
-                <img src="{{ asset('img/berita5.jpg') }}" class="card-img-top" alt="Berita 5">
+                <img src="{{ asset('img/berita5.jpg') }}" loading="lazy" class="card-img-top" alt="Berita 5">
                 <div class="card-body">
 
                   <p class="card-text">Universitas MDP Rayakan Dies Natalis dengan Jalan Santai dan Fun Games Meriahkan Kebersamaan Sivitas Akademika</p>
@@ -114,7 +126,7 @@
   
             <div class="col-md-4">
               <div class="card h-100">
-                <img src="{{ asset('img/berita6.jpg') }}" class="card-img-top" alt="Berita 6">
+                <img src="{{ asset('img/berita6.jpg') }}" loading="lazy" class="card-img-top" alt="Berita 6">
                 <div class="card-body">
                   <p class="card-text">Tim Robotika Universitas MDP mencetak prestasi luar biasa dalam ajang (SAUVC) 2025 dengan meraih peringkat ke-4</p>
                 </div>
@@ -213,7 +225,7 @@
         <div class="row">
           <div class="col-md-4">
             <div class="card w-75 mx-auto p-2">
-              <img src="{{ asset('img/alumni1.jpg') }}" class="card-img-top" alt="Alumni 1">
+              <img src="{{ asset('img/alumni1.jpg') }}" loading="lazy" class="card-img-top" alt="Alumni 1">
               <div class="card-body p-2">
                 <p class="card-text fs-6">"Universitas MDP memberi saya keterampilan yang sangat berguna di dunia kerja!"</p>
                 <p class="fs-6">- Adeka Oktisha Siregar</p>
@@ -222,7 +234,7 @@
           </div>
           <div class="col-md-4">
             <div class="card w-75 mx-auto p-2">
-              <img src="{{ asset('img/alumni2.jpg') }}" class="card-img-top" alt="Alumni 2">
+              <img src="{{ asset('img/alumni2.jpg') }}" loading="lazy" class="card-img-top" alt="Alumni 2">
               <div class="card-body p-2">
                 <p class="card-text fs-6">"Saya merasa siap menghadapi tantangan di dunia profesional setelah lulus dari MDP."</p>
                 <p class="fs-6">- Yovina M. Valentina</p>
@@ -231,7 +243,7 @@
           </div>
           <div class="col-md-4">
             <div class="card w-75 mx-auto p-2">
-              <img src="{{ asset('img/alumni3.jpg') }}" class="card-img-top" alt="Alumni 3">
+              <img src="{{ asset('img/alumni3.jpg') }}" loading="lazy" class="card-img-top" alt="Alumni 3">
               <div class="card-body p-2">
                 <p class="card-text fs-6">"MDP memberikan kesempatan luar biasa untuk berkembang dan berkarir."</p>
                 <p class="fs-6">- Budi Manto Tan Jaya</p>

@@ -12,9 +12,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('Profile');
 // });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 // Route::get("/berita/{id}/{title?}", function($id, $title = NULL) {
 //     return view("Berita", ['id' => $id, 'title' => $title]);
