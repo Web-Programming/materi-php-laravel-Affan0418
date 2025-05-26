@@ -63,6 +63,22 @@
                         />
                     </div>
 
+                    <div class="mb-4">
+                    <label for="level" class="form-label">Level</label>
+                        <select
+                            id="level"
+                            name="level"
+                            class="form-select"
+                            required
+                        >
+                            <option value="" disabled selected>Pilih level pengguna</option>
+                            <option value="user" {{ old('level') == 'user' ? 'selected' : '' }}>User</option>
+                            <option value="mahasiswa" {{ old('level') == 'mahasiswa' ? 'selected' : '' }}>Mahasiswa</option>
+                            <option value="dosen" {{ old('level') == 'dosen' ? 'selected' : '' }}>Dosen</option>
+                        </select>
+                    </div>
+
+
                     <button type="submit" class="btn btn-primary w-100">Register</button>
                 </form>
 

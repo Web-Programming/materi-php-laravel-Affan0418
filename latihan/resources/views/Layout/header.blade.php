@@ -9,8 +9,6 @@
           </a>
         </li>
         <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
-        <li class="nav-item"><a href="#tentang" class="nav-link">Tentang</a></li>
-        <li class="nav-item"><a href="#alumni" class="nav-link">Alumni</a></li>
 
       </ul>
       <!--end::Start Navbar Links-->

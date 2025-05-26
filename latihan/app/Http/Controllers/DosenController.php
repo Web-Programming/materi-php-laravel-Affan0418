@@ -116,7 +116,7 @@ class DosenController extends Controller
                 Storage::delete('public/' . $dosen->gambar);
             }
 
-            $gambarPath = $request->file('gambar')->store('gambar_fakultas', 'public');
+            $gambarPath = $request->file('gambar')->store('gambar_dosen', 'public');
             $dosen->gambar = $gambarPath;
         }
 
@@ -142,6 +142,12 @@ class DosenController extends Controller
 
         $dosen->delete();
 
-        return redirect()->route('fakultas.index')->with('success', 'Dosen berhasil dihapus.');
+        return redirect()->route('dosen.index')->with('success', 'Dosen berhasil dihapus.');
     }
+    public function confirmDelete($id)
+    {
+        $dosen = Dosen::findOrFail($id);
+        return view('dosen.delete', compact('dosen'));
+    }
+
 }
