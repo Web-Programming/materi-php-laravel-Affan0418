@@ -10,7 +10,7 @@
       <i class="fas fa-user me-2"></i>Profile
     </a>
     <a href="#" class="list-group-item list-group-item-action">
-      <i class="fas fa-cog me-2"></i>Settings
+      <i class="fas fa-cog me-2"></i>Tambah Menu Baru
     </a>
     <a href="{{ route('login') }}" class="list-group-item list-group-item-action me-2">
       <i class="nav-icon fas fa-power-off"></i>Logout

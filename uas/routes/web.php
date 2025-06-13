@@ -8,12 +8,13 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function (){
-    return view('auth.login');
-})->name('login');
-
+Route::get('/', function (){ return view('auth.login'); })->name('login');
 Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-Route::get('/logout', [AuthController::class, 'logout']);
+Route::group(['middleware' => ['auth', 'check_role:customer,admin']], function(){
+    Route::get('/customer', function () { return 'halaman customer'; } );
+});
+Route::group(['middleware' => ['auth', 'check_role:admin']], function(){
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
+});
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);

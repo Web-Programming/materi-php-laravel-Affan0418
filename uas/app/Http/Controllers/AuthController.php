@@ -17,6 +17,7 @@ class AuthController extends Controller
             'password' => 'required|min:5',
         ]);
         if(Auth::attempt($request->only('email', 'password'))) {
+            if(Auth::user()->role == 'customer') return redirect('/customer');
             return redirect()->route('dashboard');
         }
         return back()->with('error','Email atau Password Salah');
