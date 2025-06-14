@@ -33,7 +33,8 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:225',
             'email' => 'required|string|email|max:225|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'password' => 'required|string|min:6',
+            'password-confirm' => 'required|string|min:6|same:password',
         ]);
 
         if ($validator->fails()) {
@@ -45,9 +46,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         Auth::login($user);
-
-        return redirect()->route('dashboard')->with('success', 'Akun berhasil dibuat');
+        return redirect()->route('customer')->with('success', 'Akun berhasil dibuat');
     }
 }

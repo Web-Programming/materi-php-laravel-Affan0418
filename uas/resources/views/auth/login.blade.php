@@ -55,7 +55,7 @@
           
           <div class="mb-3">
             <label for="email" class="form-label">Email address</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Enter email">
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" value="{{old('email')}}">
           </div>
           @error('email')
               <div><small class="text-danger">{{$message}}</small></div>

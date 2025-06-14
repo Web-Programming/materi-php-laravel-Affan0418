@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -10,8 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (){ return view('auth.login'); })->name('login');
 Route::post('/proseslogin', [AuthController::class, 'proseslogin']);
-Route::group(['middleware' => ['auth', 'check_role:customer,admin']], function(){
-    Route::get('/customer', function () { return 'halaman customer'; } );
+Route::group(['middleware' => ['auth', 'check_role:customer']], function(){
+    Route::get('/customer', [CustomerController::class, 'customer'])->name('customer');
 });
 Route::group(['middleware' => ['auth', 'check_role:admin']], function(){
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
