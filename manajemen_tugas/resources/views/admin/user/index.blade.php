@@ -78,12 +78,13 @@
 
                         </td>
                         <td class="text-center">
-                            <a href="#" class="btn btn-sm btn-warning">
+                            <a href="{{ route('userEdit', $item->id )}}" class="btn btn-sm btn-warning">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a href="#" class="btn btn-sm btn-danger">
+                            <button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#exampleModal{{ $item->id }}">
                                 <i class="fas fa-trash"></i>
-                            </a>
+                            </button>
+                            @include('admin/user/modal')
                         </td>
                     </tr>
                     @endforeach

@@ -2,7 +2,7 @@
 
 @section('content')
 <h1 class="h3 mb-4 text-gray-800">
-    <i class="fas fa-plus mr-2"></i>
+    <i class="fas fa-edit mr-2"></i>
     {{ $title }}
 </h1>
 
@@ -15,7 +15,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route('userStore') }}" method="post">
+        <form action="{{ route('userUpdate',$user->id) }}" method="post">
             @csrf
         <div class="row mb-2">
             <div class="col-xl-6 mb-2">
@@ -23,7 +23,7 @@
                     <span class="text-danger">*</span>
                     Nama :
                 </label>
-                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ old('nama') }}">
+                <input type="text" name="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ $user->nama }}">
                 @error('nama')
                 <small class="text-danger">
                     {{ $message }}
@@ -35,7 +35,7 @@
                     <span class="text-danger">*</span>
                     Email :
                 </label>
-                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">
+                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user->email }}">
                 @error('email')
                 <small class="text-danger">
                     {{ $message }}
@@ -51,9 +51,9 @@
                 </label>
                 <select name="jabatan"
                 class="form-control @error('jabatan') is-invalid @enderror">
-                    <option selected disabled>--Pilih Jabatan--</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Karyawan">Karyawan</option>
+                    <option disabled>--Pilih Jabatan--</option>
+                    <option value="Admin" {{ $user->jabatan == 'Admin' ? 'selected' : '' }}>Admin</option>
+                    <option value="Karyawan" {{ $user->jabatan == 'Karyawan' ? 'selected' : '' }}>Karyawan</option>
                 </select>
                 @error('jabatan')
                 <small class="text-danger">
@@ -86,9 +86,9 @@
         </div>
 
         <div>
-            <button type="submit" class="btn btn-sm btn-primary">
-                <i class="fas fa-save mr-2"></i>
-                Simpan
+            <button type="submit" class="btn btn-sm btn-warning">
+                <i class="fas fa-edit mr-2"></i>
+                Edit
             </button>
         </div>
         </form>
